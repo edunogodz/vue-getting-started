@@ -8,27 +8,40 @@
         <div class="content">
           <div class="field">
             <label class="label" for="id">id</label>
-            <label class="input" name="id" readonly>
-              {{
-              clonedHero.id
-              }}
-            </label>
+            <label class="input" name="id" readonly>{{ clonedHero.id }}</label>
           </div>
           <div class="field">
             <label class="label" for="firstName">first name</label>
-            <input class="input" name="firstName" v-model="clonedHero.firstName" />
+            <input
+              class="input"
+              name="firstName"
+              v-model="clonedHero.firstName"
+            />
           </div>
           <div class="field">
             <label class="label" for="lastName">last name</label>
-            <input class="input" name="lastName" v-model="clonedHero.lastName" />
+            <input
+              class="input"
+              name="lastName"
+              v-model="clonedHero.lastName"
+            />
           </div>
           <div class="field">
             <label class="label" for="description">description</label>
-            <input class="input" name="description" v-model="clonedHero.description" />
+            <input
+              class="input"
+              name="description"
+              v-model="clonedHero.description"
+            />
           </div>
           <div class="field">
             <label class="label" for="originDate">origin date</label>
-            <input type="date" class="input" id="originDate" v-model="clonedHero.originDate" />
+            <input
+              type="date"
+              class="input"
+              id="originDate"
+              v-model="clonedHero.originDate"
+            />
             <p class="comment">
               My origin story began on
               {{ clonedHero.originDate | shortDate }}
@@ -36,20 +49,24 @@
           </div>
           <div class="field">
             <label class="label" for="capeCounter">cape counter</label>
-            <input class="input" name="capeCounter" type="number" v-model="clonedHero.capeCounter" />
+            <input
+              class="input"
+              name="capeCounter"
+              type="number"
+              v-model="clonedHero.capeCounter"
+            />
           </div>
           <div class="field">
             <label class="label" for="capeMessage">cape message</label>
-            <label class="input" name="capeMessage">
-              {{
-              capeMessage
-              }}
-            </label>
+            <label class="input" name="capeMessage">{{ capeMessage }}</label>
           </div>
         </div>
       </div>
       <footer class="card-footer">
-        <button class="link card-footer-item cancel-button" @click="cancelHero()">
+        <button
+          class="link card-footer-item cancel-button"
+          @click="cancelHero()"
+        >
           <i class="fas fa-undo"></i>
           <span>Cancel</span>
         </button>
@@ -68,7 +85,7 @@ import { format } from 'date-fns';
 import { displayDateFormat, lifecycleHooks } from '../shared';
 
 export default {
-  name: 'HelloDetail',
+  name: 'HeroDetail',
   props: {
     hero: {
       type: Object,
@@ -76,23 +93,25 @@ export default {
     },
   },
   data() {
-      return {
-          clonedHero: { ...this.hero },
-      };
+    return {
+      clonedHero: { ...this.hero },
+    };
   },
   mixins: [lifecycleHooks],
   computed: {
     fullName() {
-      return this.clonedHero ? `${this.clonedHero.firstName} ${this.clonedHero.lastName}` : '';
+      return this.clonedHero
+        ? `${this.clonedHero.firstName} ${this.clonedHero.lastName}`
+        : '';
     },
   },
   methods: {
-      cancelHero() {
-          this.$emit('cancel');
-      },
-      saveHero() {
-          this.$emit('save', this.clonedHero);
-      },
+    cancelHero() {
+      this.$emit('cancel');
+    },
+    saveHero() {
+      this.$emit('save', this.clonedHero);
+    },
     handleTheCapes(newValue) {
       const value = parseInt(newValue, 10);
       switch (value) {
@@ -116,7 +135,7 @@ export default {
       immediate: true,
       handler(newValue, oldValue) {
         console.log(
-          `CapeCounter watcher evalauted. old=${oldValue}, new=${newValue}`,
+          `CapeCounter watcher evalauted. old=${oldValue}, new=${newValue}`
         );
         this.handleTheCapes(newValue);
       },
@@ -129,4 +148,3 @@ export default {
   },
 };
 </script>
-
